@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>ドラッグ操作 - サンプル No.01</title> 
+  <link href="./css/lib/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" /> 
+  <style type="text/css">
+    div.item { width: 100px; height: 20px; line-height:20px; text-align:center; background: #666; padding:20px; margin-bottom:10px; }
+    div.drag { width: 100px; height: 20px; line-height:20px; text-align:center; background: #aaa; padding:20px; }
+    #items { width:200px; height:400px; background: #ccc; float:left; padding:20px; }
+    #goal { width:200px; height:400px; background: #ccc; float:left; padding:20px; margin-left:40px; margin-bottom:40px; }
+  </style>
+</head>
+<body style="font-size:62.5%;">
+
+  <div id="items">
+    <h2>メニュー領域</h2>
+    <br>
+    <div class="item" id='item-1'>ドラッグ可能1(※drop)</div>
+    <div class="item" id='item-2'>ドラッグ可能2(※drop)</div>
+    <div class="item" id='item-3'>ドラッグ可能3(※drop)</div>
+    <div class="drag" id='item-4'>ドラッグ可能4</div>
+  </div>
+
+  <div id='goal'>
+    <h2>ドロップ領域</h2>
+  </div>
+
+  <script src="./js/lib/jquery-1.7.1.min.js"></script> 
+  <script src="./js/lib/jquery-ui-1.8.18.custom.min.js"></script> 
+  <script type="text/javascript">
+    $('div.item').draggable();
+    $('div.drag').draggable(
+    {
+      stop: function(e, ui) {
+        alert(' top: ' + ui.position.top + ' left: ' + ui.position.left);
+      }
+    });
+    $('#goal').droppable(
+    {
+       accept: 'div.item'
+      ,drop: function(e, ui) {
+        alert('ドロップされました(' + $(ui.draggable).attr('id') + ')');
+      }
+    });
+  </script>
+</body>
+</html>
